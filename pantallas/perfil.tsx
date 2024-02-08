@@ -1,17 +1,34 @@
-import React from 'react';
+import React, {useState} from 'react';
+import type {PropsWithChildren} from 'react';
 import {
+    Image,
     SafeAreaView,
     ScrollView,
     StatusBar,
     StyleSheet,
+    Button,
     Text,
     useColorScheme,
     View,
-    Image,
   } from 'react-native';
+  import Inicio from './inicio';
+import { useNavigation } from '@react-navigation/native';
+  import Evaluacion from "../components/evaluacion/Evaluacion";
+
+  
 
 
+  
 const Perfil = ()=>{
+  const [calificacion, setCalificacion] = useState(0);
+  
+    const handleCalificacionChange = (valor: number)=>{
+      if(calificacion == 1 && valor == 1){
+        setCalificacion(0);
+    }else{
+      setCalificacion(valor);
+     }
+
     return (
         <SafeAreaView > 
           <ScrollView 
@@ -22,6 +39,8 @@ const Perfil = ()=>{
           style={styles.fotoPerfil}
             source={require('../imagenes/fotop.jpg')} 
             />
+             <Evaluacion calificacion={calificacion}
+          onCalificacionChange={handleCalificacionChange} />
             <Text style={styles.encabezado}>Leonardo Ruben Ordonez Rivera</Text>
             <View style={styles.seccion}>
             <Text style={styles.seccionHeder}>Fecha de nacimiento:</Text>  
@@ -41,6 +60,12 @@ const Perfil = ()=>{
       );
     
 }
+
+
+
+
+
+
     const styles = StyleSheet.create({
       encabezado: {
         fontSize: 20,
@@ -76,4 +101,3 @@ const Perfil = ()=>{
     });
 
  export default Perfil;
-

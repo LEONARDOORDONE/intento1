@@ -1,21 +1,36 @@
-import React, {useState} from "react";
-import { Button, ScrollView, StyleSheet, Text } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import  React, {useState}  from "react";
+import type {PropsWithChildren} from 'react';
 import {
-    Image,
+  Image,
+    SafeAreaView,
+    ScrollView,
     StatusBar,
+    StyleSheet,
+    Button,
+    Text,
     useColorScheme,
     View,
-  } from 'react-native';
+} from 'react-native';
+import Perfil from "./Perfil";
+import { useNavigation } from "@react-navigation/native";
+import Evaluacion from '../components/evaluacion/Evaluacion';
 
 
+     const inicio = ({navigation}) => {
 
-const Inicio = ({navigation}) => {
-
-    const handlepress = ()=>{
+      const [calificacion, setCalificacion] = useState(0);
+    
+      const handleCalificacionChange = (valor: number)=>{
+        if(calificacion == 1 && valor == 1){
+          setCalificacion(0);
+      }else{
+        setCalificacion(valor);
+       }
+      } 
+      const handlepress = ()=>{
         navigation.navigate('Perfil_VG');
      };
-
+    
 
      
     
@@ -28,6 +43,8 @@ const Inicio = ({navigation}) => {
                 style={styles.fotoperfilp}
                 source={require('../imagenes/joji.jpeg')} 
                 />
+                 <Evaluacion calificacion={calificacion}
+          onCalificacionChange={handleCalificacionChange} />
             <Text style={styles.seccionHeaderp}> George Miller joji</Text>
     
             <View 
